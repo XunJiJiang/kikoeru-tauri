@@ -14,11 +14,6 @@
       "identifier": "shell:allow-execute",
       "allow": [
         {
-          "name": "exec-sh",
-          "cmd": "sh",
-          "args": true
-        },
-        {
           "name": "ke-mac",
           "cmd": "./resources/mac/kikoeru-express",
           "args": true
@@ -38,11 +33,6 @@
     {
       "identifier": "shell:allow-spawn",
       "allow": [
-        {
-          "name": "exec-sh",
-          "cmd": "sh",
-          "args": true
-        },
         {
           "name": "ke-mac",
           "cmd": "./resources/mac/kikoeru-express",
@@ -64,11 +54,6 @@
       "identifier": "shell:allow-kill",
       "allow": [
         {
-          "name": "exec-sh",
-          "cmd": "sh",
-          "args": true
-        },
-        {
           "name": "ke-mac",
           "cmd": "./resources/mac/kikoeru-express",
           "args": true
@@ -89,11 +74,6 @@
       "identifier": "shell:allow-stdin-write",
       "allow": [
         {
-          "name": "exec-sh",
-          "cmd": "sh",
-          "args": true
-        },
-        {
           "name": "ke-mac",
           "cmd": "./resources/mac/kikoeru-express",
           "args": true
@@ -112,7 +92,7 @@
     },
     {
       "identifier": "http:default",
-      "allow": [{ "url": "http://localhost:8888" }]
+      "allow": [{ "url": "http://localhost:8888/*" }]
     }
   ]
 }
