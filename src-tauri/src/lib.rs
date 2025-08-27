@@ -5,6 +5,8 @@ fn open_new_window(app: tauri::AppHandle, label: String, url: String) {
     let url = WebviewUrl::App(url.into());
     tauri::WebviewWindowBuilder::new(&app, label, url)
         .title("kikoeru")
+        .inner_size(800.0, 600.0)
+        .min_inner_size(450.0, 256.0)
         .build()
         .expect("failed to build window");
 }
