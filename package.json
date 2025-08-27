@@ -1,8 +1,10 @@
 {
   "name": "kikoeru-tauri",
-  "private": true,
-  "version": "0.1.0",
+  "version": "1.0.0",
   "type": "module",
+  "keywords": [
+    "kikoeru"
+  ],
   "scripts": {
     "tauri": "tauri"
   },
@@ -12,5 +14,13 @@
   "dependencies": {
     "@tauri-apps/plugin-http": "~2",
     "@tauri-apps/plugin-shell": "~2"
+  },
+  "license": "GPL-3.0-only",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/XunJiJiang/kikoeru-tauri.git"
+  },
+  "bugs": {
+    "url": "https://github.com/XunJiJiang/kikoeru-tauri/issues"
   }
 }
