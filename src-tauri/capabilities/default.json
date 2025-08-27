@@ -92,7 +92,12 @@
     },
     {
       "identifier": "http:default",
-      "allow": [{ "url": "http://localhost:8888/*" }]
-    }
+      "allow": [
+        {
+          "url": "http://localhost:8888/*"
+        }
+      ]
+    },
+    "dialog:default"
   ]
 }
