@@ -3,7 +3,7 @@
   "productName": "kikoeru-tauri",
   "version": "0.1.0",
   "identifier": "com.xunji.kikoeru-tauri",
-    "build": {
+  "build": {
     "beforeDevCommand": "bun run dev",
     "devUrl": "http://localhost:1420",
     "beforeBuildCommand": "bun run build",
@@ -34,11 +34,8 @@
     ],
     "resources": {
       "resources/mac/node_sqlite3.node": "resources/mac/node_sqlite3.node",
-      "resources/mac/kikoeru-express": "resources/mac/kikoeru-express",
-      "resources/win/node_sqlite3.node": "resources/win/node_sqlite3.node",
-      "resources/win/kikoeru-express.exe": "resources/win/kikoeru-express.exe",
-      "resources/linux/node_sqlite3.node": "resources/linux/node_sqlite3.node",
-      "resources/linux/kikoeru-express": "resources/linux/kikoeru-express"
-    }
+      "resources/mac/kikoeru-express": "resources/mac/kikoeru-express"
+    },
+    "externalBin": []
   }
 }

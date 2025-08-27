@@ -8,7 +8,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "tauri": "tauri"
+    "tauri:add": "tauri add",
+    "tauri": "bun run script:gen-tauri-resources && tauri",
+    "script:gen-tauri-resources": "bun ./scripts/gen-tauri-resources.js"
   },
   "devDependencies": {
     "@tauri-apps/cli": "^2",
@@ -16,8 +18,8 @@
   },
   "dependencies": {
     "@tauri-apps/api": "^2.8.0",
-    "@tauri-apps/plugin-dialog": "~2",
     "@tauri-apps/plugin-http": "~2",
+    "@tauri-apps/plugin-log": "~2",
     "@tauri-apps/plugin-shell": "~2",
     "@types/node": "^24.3.0"
   },

@@ -1,6 +1,6 @@
 import { Command } from '@tauri-apps/plugin-shell';
 import { invoke } from '@tauri-apps/api/core';
-import { message } from '@tauri-apps/plugin-dialog';
+import { resourceDir, join } from '@tauri-apps/api/path';
 
 try {
   let platform = '';
@@ -11,10 +11,16 @@ try {
   }
 
   const openNewWindowButton = document.querySelector('#open-new-window');
+
   const restartServiceButton = document.querySelector('#restart-service');
+
   const outputElement = document.querySelector('#output');
 
   openNewWindowButton.disabled = true;
+
+  let id = 0;
+  let localhostWebsite = '';
+  let cmd;
 
   openNewWindowButton.onclick = () => {
     if (localhostWebsite) {
@@ -22,31 +28,36 @@ try {
     }
   };
   restartServiceButton.onclick = async () => {
-    (await cmd).kill();
+    if (cmd && (await cmd).kill) {
+      (await cmd).kill();
+    }
     cmd = runKikoeruServe();
     localhostWebsite = '';
     openNewWindowButton.disabled = true;
     outputElement.innerHTML = '';
   };
 
-  let command = '';
+  cmd = runKikoeruServe();
 
-  if (platform.includes('mac')) {
-    command = 'ke-mac';
-  } else if (platform.includes('win')) {
-    command = 'ke-win.exe';
-  } else if (platform.includes('linux')) {
-    command = 'ke-linux';
-  }
+  cmd.catch(e => {
+    console.error(`Service process failed to start: ${e}`);
+  });
 
-  let id = 0;
-  let localhostWebsite = '';
-
-  let cmd = runKikoeruServe();
-
-  function runKikoeruServe() {
+  async function runKikoeruServe() {
+    const _resourceDir = await resourceDir();
     try {
-      const cmd = Command.create(command, [], {
+      const execPath = await join(
+        _resourceDir,
+        'resources',
+        platform.includes('win') ? 'win' : platform.includes('mac') ? 'mac' : 'linux',
+        `kikoeru-express${platform.includes('win') ? '.exe' : ''}`
+      );
+      const cmd = Command.create('exec-sh', ['-c', execPath], {
+        // cwd: await join(
+        //   _resourceDir,
+        //   'resources',
+        //   platform.includes('win') ? 'win' : platform.includes('mac') ? 'mac' : 'linux'
+        // ),
         env: {
           LANG: 'zh_CN.UTF-8',
           LC_ALL: 'zh_CN.UTF-8',
@@ -59,6 +70,7 @@ try {
       cmd.stdout.on('data', _chunk => {
         const chunk = new Uint8Array(_chunk);
         const str = new TextDecoder('utf-8').decode(chunk);
+
         output += str;
         const match = str.match(/(https?:\/\/[^\s]+)/);
         if (match && match[1]) {
@@ -77,23 +89,21 @@ try {
       cmd.stderr.on('data', _chunk => {
         const chunk = new Uint8Array(_chunk);
         const str = new TextDecoder('utf-8').decode(chunk);
+
         outputElement.textContent += str;
         output += str;
       });
 
-      cmd.on('close', () => {
-        message('kikoeru-express exited:\n' + output);
-      });
-      cmd.on('error', () => {
-        message('kikoeru-express error:\n' + output);
+      cmd.on('close', () => {});
+      cmd.on('error', err => {
+        console.error(`Service process error: ${err}`);
       });
 
       return cmd.spawn();
-    } catch (error) {
-      console.error(error);
-      message(error.toString());
+    } catch (err) {
+      console.error(err);
     }
   }
 } catch (e) {
-  message(e.toString());
+  console.error(`App error: ${e}`);
 }
