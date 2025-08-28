@@ -8,9 +8,9 @@
 - 后端：[kikoeru-express](https://github.com/XunJiJiang/kikoeru-express)
 - 前端：[kikoeru-quasar](https://github.com/XunJiJiang/kikoeru-quasar)
 
-## Releases
+## 下载
 
-- [kikoeru-tauri Releases](https://github.com/XunJiJiang/kikoeru-tauri/releases)
+- [下载](https://github.com/XunJiJiang/kikoeru-tauri/releases)
 
 ## 构建
 
@@ -42,7 +42,7 @@ bun tauri build
 ## TODO
 
 - [x] 重启服务
-- [ ] 数据库和配置文件的导入和导出
+- [x] 数据库和配置文件的导入和导出
 
 ## 声明
 

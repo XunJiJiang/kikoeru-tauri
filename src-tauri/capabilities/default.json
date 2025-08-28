@@ -58,6 +58,10 @@
         }
       ]
     },
-    "log:default"
+    "log:default",
+    "fs:default",
+    "fs:allow-copy-file",
+    "fs:scope-resource-recursive",
+    "dialog:default"
   ]
 }
